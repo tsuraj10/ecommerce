@@ -1,197 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JerseyPasal - Cart</title>
-        <link rel="stylesheet" href="style.css">
-        <style>
-    /* Additional CSS for cart.html */
-    .cart-items {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 20px;
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - JerseyPasal</title>
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #007bff;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-details h4 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .cart-item-details p {
+            margin: 5px 0;
+        }
+
+        .btn-primary, .btn-danger {
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .total-amount {
+            text-align: right;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .checkout-btn {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Your Cart</h1>
+      <div id="cart-items">
+        <!-- Cart items will be loaded here by JavaScript -->
+      </div>
+      <div class="total-amount">
+        Total: Rs. <span id="total-amount">0</span>
+      </div>
+      <div class="checkout-btn">
+        <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+
+    <script>
+        function loadCartItems() {
+            const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            let totalAmount = 0;
+
+            cartItemsContainer.innerHTML = '';
+
+            cartData.forEach(item => {
+                const itemPrice = getItemPrice(item.name);
+                const itemTotal = itemPrice * item.quantity;
+                totalAmount += itemTotal;
+
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <img src="${getItemImage(item.name)}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <p>Quantity: ${item.quantity}</p>
+                        <p>Price: Rs. ${itemPrice}</p>
+                        <p>Total: Rs. ${itemTotal}</p>
+                        <button class="btn btn-danger" onclick="removeFromCart('${item.name}')">Remove</button>
+                    </div>
+                `;
+
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+
+            document.getElementById('total-amount').innerText = totalAmount;
+        }
+
+        function getItemPrice(name) {
+            const prices = {
+                'Argentina': 2099,
+                'PSG': 1599,
+                'Barcelona': 1899,
+                'Brazil': 1399,
+                'Manchester City': 1499,
+                'Manchester United': 1199,
+                'Germany': 1500,
+                'Real Madrid': 1099
+            };
+            return prices[name] || 0;
+        }
+
+        function getItemImage(name) {
+            const images = {
+                'Argentina': './p1.jpg',
+                'PSG': './p2.jpg',
+                'Barcelona': './p3.jpg',
+                'Brazil': './p4.jpg',
+                'Manchester City': './p5.png',
+                'Manchester United': './p6.png',
+                'Germany': './p7.jpg',
+                'Real Madrid': './p8.jpg'
+            };
+            return images[name] || './default.jpg';
+        }
+
+        function removeFromCart(productName) {
+            let cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+            cartData = cartData.filter(item => item.name !== productName);
+            localStorage.setItem('cartData', JSON.stringify(cartData));
+            loadCartItems();
+        }
+
+        function checkout() {
+    const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+    if (cartData.length === 0) {
+        alert('Your cart is empty.');
+        return;
     }
 
-    .cart-item-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
+    const totalAmount = document.getElementById('total-amount').innerText;
+    localStorage.setItem('totalAmount', totalAmount);
 
-    .cart-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+    // Save cart items in localStorage before redirecting
+    localStorage.setItem('purchaseItem', JSON.stringify(cartData));
 
-    .cart-item img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
+    // Clear cart data after checkout
+    localStorage.removeItem('cartData');
 
-    .cart-item-details {
-      margin-bottom: 10px;
-    }
-
-    .cart-item-details p {
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    .cart-item button {
-      background-color: #f00;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    .cart-item button:hover {
-      background-color: #c00;
-    }
-
-    .empty-cart-message {
-      text-align: center;
-      margin-top: 20px;
-    }
-    
-  </style>
-    </head>
-    <body>
-
-        <!-- Cart Section -->
-        <section class="cart-items">
-            <h1>Added Cart Products</h1>
-
-            <div id="cartItems" class="cart-item-grid"></div>
-
-            <p id="emptyCartMessage" class="empty-cart-message"></p>
-
-        </section>
-
-        <script>
-    // Retrieve the cart data from localStorage
-    let cartData = JSON.parse(localStorage.getItem('cartData')) || [];
-
-    const cartItemsContainer = document.getElementById('cartItems');
-    const emptyCartMessage = document.getElementById('emptyCartMessage');
-
-    // Define the available products array with necessary details
-    const availableProducts = [
-      {
-        name: 'Argentina',
-        image: 'p1.jpg',
-        price: 'Rs.2099'
-      },
-      {
-        name: 'PSG',
-        image: 'p2.jpg',
-        price: 'Rs.1599'
-      },
-      {
-        name: 'Barcelona',
-        image: 'p3.jpg',
-        price: 'Rs.1899'
-      },
-      {
-        name: 'Brazil',
-        image: 'p4.jpg',
-        price: 'Rs.1399'
-      },
-      {
-        name: 'Manchester City',
-        image: 'p5.jpg',
-        price: 'Rs.1499'
-      },
-      {
-        name: 'Manchester United',
-        image: 'p6.jpg',
-        price: 'Rs.1199'
-      },
-      {
-        name: 'Germany',
-        image: 'p7.jpg',
-        price: 'Rs.1500'
-      },
-      {
-        name: 'Real Madrid',
-        image: 'p8.jpg',
-        price: 'Rs.1099'
-      }
-    ];
-
-    function updateCartDisplay() {
-      cartItemsContainer.innerHTML = ''; // Clear the existing cart items
-
-      if (cartData.length > 0) {
-        // Display the cart items
-        cartData.forEach(product => {
-          // Check if the product exists in the shop's available products
-          const availableProduct = availableProducts.find(p => p.name === product.name);
-          if (availableProduct) {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-
-            const productImage = document.createElement('img');
-            productImage.src = availableProduct.image; // Set the correct image path
-            productImage.alt = availableProduct.name;
-
-
-            const productName = document.createElement('p');
-            productName.textContent = availableProduct.name
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.addEventListener('click', () => removeItemFromCart(product.name));
-
-            const buyButton = createBuyButton(availableProduct);
-
-            cartItemDetails.appendChild(productName);
-            cartItemDetails.appendChild(removeButton);
-
-            cartItem.appendChild(productImage);
-            cartItem.appendChild(cartItemDetails);
-            cartItem.appendChild(buyButton);
-
-            cartItemsContainer.appendChild(cartItem);
-          }
-        });
-
-        emptyCartMessage.textContent = ''; // Clear the empty cart message
-      } else {
-        // Show the "Your cart is empty" message
-        emptyCartMessage.textContent = 'Your cart is empty.';
-      }
-    }
-
-    updateCartDisplay(); // Initial display on page load
-
-   
-
-    function removeItemFromCart(productName) {
-      // Remove the item from the cartData array
-      cartData = cartData.filter(product => product.name !== productName);
-
-      // Update the cartdata in localStorage
-      localStorage.setItem('cartData', JSON.stringify(cartData));
-
-      updateCartDisplay(); // Update the cart display
-
-      // Check if the cart is empty and show/hide the "Buy Now" button accordingly
-      if (cartData.length === 0) {
-        emptyCartMessage.textContent = 'Your cart is empty.';
-      }
-    }
-
-    function getAccountName() {
-      return sessionStorage.getItem('accountName');
-    }
-
- 
-  </script>
-    </body>
+    window.location.href = 'purchase.html';
+}
+        document.addEventListener('DOMContentLoaded', loadCartItems);
+    </script>
+  </body>
 </html>

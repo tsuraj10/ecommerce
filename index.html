@@ -111,7 +111,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('Argentina')">Add
+                                        onclick="addToCart('Argentina','./p1.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('PSG')">Add
+                                        onclick="addToCart('PSG','./p2.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('Barcelona')">Add
+                                        onclick="addToCart('Barcelona','./p3.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('Brazil')">Add
+                                        onclick="addToCart('Brazil','./p4.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('Manchester City')">Add
+                                        onclick="addToCart('Manchester City','./p5.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('Manchester United')">Add
+                                        onclick="addToCart('Manchester United','./p6.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -218,7 +218,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('Germany')">Add
+                                        onclick="addToCart('Germany','./p7.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -236,7 +236,7 @@
                                             href="purchase.html" id="purc">Buy
                                             Now</a></button></div>
                                 <div id="btn2"><button class="add-to-cart"
-                                        onclick="addToCart('Real Madrid')">Add
+                                        onclick="addToCart('Real Madrid','./p8.jpg')">Add
                                         Cart</button></div>
                             </div>
                         </div>
@@ -354,30 +354,20 @@
                         alt></i></a>
 
             <script>
-    function addToCart(productName) {
-      // Get the cart data from localStorage or create an empty array
-      const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+    function addToCart(productName, imageUrl) {
+        const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+        const existingProduct = cartData.find(product => product.name === productName);
 
-      // Check if the product is already in the cart
-      const existingProduct = cartData.find(product => product.name === productName);
+        if (existingProduct) {
+            existingProduct.quantity++;
+        } else {
+            cartData.push({ name: productName, image: imageUrl, quantity: 1 });
+        }
 
-      if (existingProduct) {
-        // Increment the quantity if the product is already in the cart
-        existingProduct.quantity++;
-      } else {
-        // Add the product to the cart with quantity 1
-        cartData.push({ name: productName, quantity: 1 });
-      }
-
-      // Save the updated cart data to localStorage
-      localStorage.setItem('cartData', JSON.stringify(cartData));
-
-      // Redirect to the cart.html page
-      window.location.href = 'index.html';
+        localStorage.setItem('cartData', JSON.stringify(cartData));
+        alert('Product added to cart');
     }
+</script>
 
-    // Rest of the existing JavaScript code for search functionality
-    // ...
-  </script>
         </body>
     </html>
