@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JerseyPasal - Cart</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+    /* Additional CSS for cart.html */
+    .cart-items {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .cart-item-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .cart-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .cart-item-details {
+      margin-bottom: 10px;
+    }
+
+    .cart-item-details p {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .cart-item button {
+      background-color: #f00;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .cart-item button:hover {
+      background-color: #c00;
+    }
+
+    .empty-cart-message {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+  </style>
+    </head>
+    <body>
+
+        <!-- Cart Section -->
+        <section class="cart-items">
+            <h1>Added Cart Products</h1>
+
+            <div id="cartItems" class="cart-item-grid"></div>
+
+            <p id="emptyCartMessage" class="empty-cart-message"></p>
+
+        </section>
+
+        <script>
+    // Retrieve the cart data from localStorage
+    let cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+
+    const cartItemsContainer = document.getElementById('cartItems');
+    const emptyCartMessage = document.getElementById('emptyCartMessage');
+
+    // Define the available products array with necessary details
+    const availableProducts = [
+      {
+        name: 'Argentina',
+        image: 'p1.jpg',
+        price: 'Rs.2099'
+      },
+      {
+        name: 'PSG',
+        image: 'p2.jpg',
+        price: 'Rs.1599'
+      },
+      {
+        name: 'Barcelona',
+        image: 'p3.jpg',
+        price: 'Rs.1899'
+      },
+      {
+        name: 'Brazil',
+        image: 'p4.jpg',
+        price: 'Rs.1399'
+      },
+      {
+        name: 'Manchester City',
+        image: 'p5.jpg',
+        price: 'Rs.1499'
+      },
+      {
+        name: 'Manchester United',
+        image: 'p6.jpg',
+        price: 'Rs.1199'
+      },
+      {
+        name: 'Germany',
+        image: 'p7.jpg',
+        price: 'Rs.1500'
+      },
+      {
+        name: 'Real Madrid',
+        image: 'p8.jpg',
+        price: 'Rs.1099'
+      }
+    ];
+
+    function updateCartDisplay() {
+      cartItemsContainer.innerHTML = ''; // Clear the existing cart items
+
+      if (cartData.length > 0) {
+        // Display the cart items
+        cartData.forEach(product => {
+          // Check if the product exists in the shop's available products
+          const availableProduct = availableProducts.find(p => p.name === product.name);
+          if (availableProduct) {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+
+            const productImage = document.createElement('img');
+            productImage.src = availableProduct.image; // Set the correct image path
+            productImage.alt = availableProduct.name;
+
+
+            const productName = document.createElement('p');
+            productName.textContent = availableProduct.name
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.addEventListener('click', () => removeItemFromCart(product.name));
+
+            const buyButton = createBuyButton(availableProduct);
+
+            cartItemDetails.appendChild(productName);
+            cartItemDetails.appendChild(removeButton);
+
+            cartItem.appendChild(productImage);
+            cartItem.appendChild(cartItemDetails);
+            cartItem.appendChild(buyButton);
+
+            cartItemsContainer.appendChild(cartItem);
+          }
+        });
+
+        emptyCartMessage.textContent = ''; // Clear the empty cart message
+      } else {
+        // Show the "Your cart is empty" message
+        emptyCartMessage.textContent = 'Your cart is empty.';
+      }
+    }
+
+    updateCartDisplay(); // Initial display on page load
+
+   
+
+    function removeItemFromCart(productName) {
+      // Remove the item from the cartData array
+      cartData = cartData.filter(product => product.name !== productName);
+
+      // Update the cartdata in localStorage
+      localStorage.setItem('cartData', JSON.stringify(cartData));
+
+      updateCartDisplay(); // Update the cart display
+
+      // Check if the cart is empty and show/hide the "Buy Now" button accordingly
+      if (cartData.length === 0) {
+        emptyCartMessage.textContent = 'Your cart is empty.';
+      }
+    }
+
+    function getAccountName() {
+      return sessionStorage.getItem('accountName');
+    }
+
+ 
+  </script>
+    </body>
+</html>

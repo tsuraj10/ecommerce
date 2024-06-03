@@ -1,0 +1,305 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#navbar-top {
+  background-color: black;
+  color: white;
+}
+.rsc {
+  display: flex;
+}
+#btn3 {
+  width: 100px;
+  height: 36px;
+  background-color: #f5b500;
+  border: none;
+  cursor: pointer;
+}
+#btn3 a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.icons {
+  margin-left: 10px;
+  margin-top: 3px;
+  cursor: pointer;
+}
+.icons i {
+  margin-left: 5px;
+}
+/* navbar */
+#navbar-color {
+  background-color: #f5b500;
+}
+#navbar-logo i img {
+  width: 100px;
+  margin-bottom: 7px;
+  margin-right: 10px;
+}
+#navbar-logo {
+  font-size: 30px;
+  font-family: "Tiro Devanagari Marathi", serif;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 1px 5px black;
+}
+.nav-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+.nav-link:hover {
+  color: white;
+  text-shadow: 2px 1px 5px black;
+}
+.new-icons {
+  cursor: pointer;
+}
+/* navbar */
+
+/* card content */
+.card {
+  box-shadow: 0 0 5px black;
+}
+.card h5 {
+  font-weight: bold;
+}
+.card p {
+  font-weight: bold;
+}
+.checked {
+  color: #f5b500;
+}
+#btn2 {
+  text-align: center;
+  margin-top: 10px;
+}
+#btn2 button {
+  width: 100px;
+  height: 30px;
+  background-color: #f5b500;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 3px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+#btn2 button:hover {
+  background-color: #f5b500;
+  box-shadow: 0 0 5px #f5b500, 0 0 20px #f5b500, 0 0 60px #f5b500,
+    0 0 150px #f5b500;
+}
+/* card content */
+
+/* footer content */
+.newsletter-w3pvt form {
+  margin: 0 auto;
+  width: 60%;
+}
+.newsletter-w3pvt p {
+  font-size: 1.2em;
+  margin-bottom: 2em;
+  color: #777;
+  font-weight: 600;
+}
+.subscribe-sec input {
+  padding: 0.85em 1em;
+  color: #495057;
+  border-radius: 0.25rem;
+  border: none;
+  outline: none;
+  letter-spacing: 2px;
+  -moz-box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+.btn.subscribe {
+  background: #f5b500;
+  -moz-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  color: #fff;
+  padding: 0.8em 3em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  font-weight: bold;
+  -moz-box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+.btn.subscribe:hover,
+.btn.shop:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 5px #f5b500, 0 0 20px #f5b500, 0 0 60px #f5b500,
+    0 0 150px #f5b500;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.arrow {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 40px;
+  right: 50px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+}
+#btn1 {
+  margin-top: 10px;
+}
+#btn1 button {
+  width: 150px;
+  height: 35px;
+  background-color: #f5b500;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 3px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+#btn1 button:hover {
+  background-color: #f5b500;
+  box-shadow: 0 0 5px #f5b500, 0 0 20px #f5b500, 0 0 60px #f5b500,
+    0 0 150px #f5b500;
+}
+
+body {
+  background-color: rgb(175, 161, 5);
+}
+.login-form {
+  position: absolute;
+  top: 20px;
+  left: 450px;
+  width: 25rem;
+  box-shadow: grey;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  text-align: center;
+}
+.login-form.active {
+  right: 2rem;
+  transition: 0.4s linear;
+}
+.login-form h3 {
+  font-size: 2.5rem;
+  text-transform: capitalize;
+  color: black;
+}
+.login-form .box {
+  width: 80%;
+  margin: 0.7rem 0;
+  background: #eee;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+  color: black;
+  text-transform: none;
+}
+.login-form p {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+.login-form p a {
+  color: orange;
+  text-decoration: underline;
+}
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.8rem 3rem;
+  font-size: 1.7rem;
+  border-radius: 0.5rem;
+  border: 0.2rem solid black;
+  color: black;
+  cursor: pointer;
+  background: none;
+}
+.btn:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 5px #f5b500, 0 0 20px #f5b500, 0 0 60px #f5b500,
+    0 0 150px #f5b500;
+}
+
+.card-body {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.login-container {
+  height: 100vh;
+  width: 900px; 
+}
+.appear {
+  display: none;
+}
+
+.disappear {
+  display: block;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.div-container {
+  display: inline-block;
+  justify-content: flex-end;
+  position: relative;
+  left: 900px;
+  margin: 20px;
+  padding: 20px;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.cart-item-info {
+  flex-grow: 1;
+}
+
+.cart-item-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.cart-item-price {
+  font-size: 16px;
+  color: #777;
+}
+
+#cart-total {
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+#purc {
+  color: black;
+}
